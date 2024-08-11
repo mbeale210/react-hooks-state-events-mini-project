@@ -2,15 +2,7 @@ import React, { useState } from "react";
 import { v4 as uuid } from "uuid";
 
 const NewTaskForm = ({ categories, onTaskFormSubmit }) => {
-  const [form, setForm] = useState({ text: "", category: "" });
-
-  const renderCategories = categories.map((c) => {
-    return (
-      <option key={c} value={c}>
-        {c}
-      </option>
-    );
-  });
+  const [form, setForm] = useState({ text: "", category: categories[0] });
 
   const handleChange = (e) => {
     setForm({
@@ -21,11 +13,8 @@ const NewTaskForm = ({ categories, onTaskFormSubmit }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onTaskFormSubmit({
-      id: uuid(),
-      ...form,
-    });
-    setForm({ text: "", category: "" }); // Reset form after submission
+    onTaskFormSubmit(form);
+    setForm({ text: "", category: categories[0] });
   };
 
   return (
@@ -37,12 +26,17 @@ const NewTaskForm = ({ categories, onTaskFormSubmit }) => {
           name="text"
           value={form.text}
           onChange={handleChange}
+          required
         />
       </label>
       <label>
         Category
         <select name="category" value={form.category} onChange={handleChange}>
-          {renderCategories}
+          {categories.map((c) => (
+            <option key={c} value={c}>
+              {c}
+            </option>
+          ))}
         </select>
       </label>
       <input type="submit" value="Add task" />

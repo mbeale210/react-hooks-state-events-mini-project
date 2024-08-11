@@ -1,13 +1,11 @@
 import React from "react";
 
-const Task = ({ text, category }) => {
-  const handleDelete = (e) => e.target.parentNode.remove();
-
+const Task = ({ text, category, onDelete }) => {
   return (
     <div className="task">
       <div className="label">{category}</div>
       <div className="text">{text}</div>
-      <button className="delete" onClick={handleDelete}>
+      <button className="delete" onClick={onDelete}>
         X
       </button>
     </div>
