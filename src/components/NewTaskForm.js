@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { v4 as uuid } from "uuid";
 
 const NewTaskForm = ({ categories, onTaskFormSubmit }) => {
   const [form, setForm] = useState({ text: "", category: categories[0] });

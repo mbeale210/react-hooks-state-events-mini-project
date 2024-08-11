@@ -1,13 +1,9 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import CategoryFilter from "./CategoryFilter";
 import NewTaskForm from "./NewTaskForm";
 import TaskList from "./TaskList";
 import { TASKS, CATEGORIES } from "../data";
 import { v4 as uuid } from "uuid";
-
-console.log("Here's the data you're working with");
-console.log({ CATEGORIES, TASKS });
-
 
 function App() {
   const [tasks, setTasks] = useState(TASKS.map((t) => ({ id: uuid(), ...t })));
@@ -24,6 +20,7 @@ function App() {
   const handleDeleteTask = (taskId) => {
     setTasks(tasks.filter((task) => task.id !== taskId));
   };
+
   return (
     <div className="App">
       <h2>My tasks</h2>

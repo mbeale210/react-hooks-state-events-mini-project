@@ -1,10 +1,9 @@
 import React from "react";
 import Task from "./Task";
 
-const TaskList = ({ tasks, filter, onDeleteTask }) => {
-  const filteredTasks = tasks.filter(
-    (t) => filter === "All" || t.category === filter
-  );
+const TaskList = ({ tasks, filter = "All", onDeleteTask }) => {
+  const filteredTasks =
+    filter === "All" ? tasks : tasks.filter((t) => t.category === filter);
 
   return (
     <div className="tasks">
@@ -13,7 +12,7 @@ const TaskList = ({ tasks, filter, onDeleteTask }) => {
           key={task.id}
           text={task.text}
           category={task.category}
-          onDelete={() => onDeleteTask(task.id)}
+          onDelete={() => onDeleteTask && onDeleteTask(task.id)}
         />
       ))}
     </div>

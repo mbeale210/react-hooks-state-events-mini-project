@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React from "react";
 
 const CategoryFilter = ({ categories, onFilterChange, currentFilter }) => {
   const handleClick = (category) => {
