@@ -5,18 +5,24 @@ import TaskList from "./TaskList";
 import { TASKS, CATEGORIES } from "../data";
 import { v4 as uuid } from "uuid";
 
-// console.log("Here's the data you're working with");
-// console.log({ CATEGORIES, TASKS });
+console.log("Here's the data you're working with");
+console.log({ CATEGORIES, TASKS });
 
 
 function App() {
-  const initialTasks = TASKS; // Assuming TASKS is an array of tasks
-  const [tasks, setTasks] = useState(
-    initialTasks.map((t) => ({ id: uuid(), ...t })) // Corrected usage of initialTasks
-  );
+  const [tasks, setTasks] = useState(TASKS.map((t) => ({ id: uuid(), ...t })));
   const [filter, setFilter] = useState("All");
+
   const handleFilterChange = (newFilter) => {
     setFilter(newFilter);
+  };
+
+  const handleNewTask = (newTask) => {
+    setTasks([...tasks, { id: uuid(), ...newTask }]);
+  };
+
+  const handleDeleteTask = (taskId) => {
+    setTasks(tasks.filter((task) => task.id !== taskId));
   };
   return (
     <div className="App">
@@ -24,9 +30,10 @@ function App() {
       <CategoryFilter
         categories={CATEGORIES}
         onFilterChange={handleFilterChange}
+        currentFilter={filter}
       />
       <NewTaskForm categories={CATEGORIES} onTaskFormSubmit={handleNewTask} />
-      <TaskList tasks={tasks} filter={filter} />
+      <TaskList tasks={tasks} filter={filter} onDeleteTask={handleDeleteTask} />
     </div>
   );
 }

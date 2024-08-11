@@ -1,11 +1,8 @@
 import { useState } from "react";
 
-const CategoryFilter = ({ categories, onFilterChange }) => {
-  const [currentFilter, setCurrentFilter] = useState(categories[0]);
-
+const CategoryFilter = ({ categories, onFilterChange, currentFilter }) => {
   const handleClick = (category) => {
-    setCurrentFilter(category);
-    onFilterChange(category); 
+    onFilterChange(category);
   };
 
   return (
@@ -16,7 +13,7 @@ const CategoryFilter = ({ categories, onFilterChange }) => {
           <button
             key={category}
             type="button"
-            className={props.filter === category ? "selected" : ""} // Accessing filter via props
+            className={currentFilter === category ? "selected" : ""}
             onClick={() => handleClick(category)}
           >
             {category}
